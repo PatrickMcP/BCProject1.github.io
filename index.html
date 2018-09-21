@@ -10,11 +10,13 @@
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <!-- Materialize CSS CDN -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css">
+    
+    
     <!-- Your custom styles -->
     <link rel="stylesheet" href="css/style.css">
     <!-- Used as an example only to position the footer at the end of the page.
-    You can delete these styles or move it to your custom css file -->
-    <style>
+        You can delete these styles or move it to your custom css file -->
+        <style>
         body {
             display: flex;
             min-height: 100vh;
@@ -68,7 +70,7 @@
                     <div class="card blue-grey darken-1">
                         <div class="video-container">
                             <iframe width="560" height="315" src="https://www.youtube.com/embed/f7Al63L2LzA" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
-                          </div>
+                        </div>
                     </div>
                     <!-- Your content here -->
                 </div>
@@ -85,26 +87,26 @@
                             </ul>
                             <!-- <p>I am a very simple card. I am good at containing small bits of information. I am
                                 convenient because I require little markup to use effectively.</p> -->
+                            </div>
                         </div>
+                        <!-- Your content here -->
                     </div>
-                    <!-- Your content here -->
                 </div>
-            </div>
-            <div class="row">
-                <div class="col s12 m4 l6">
-                    <div class="card blue-grey darken-1">
-                        <div class="card-content white-text">
-                            <span class="card-title"></span>
-                            <label for="artist-input">Choose Your Artist</label>
-                        
-                            <input type="text" id="artist-input"><br>
+                <div class="row">
+                    <div class="col s12 m4 l6">
+                        <div class="card blue-grey darken-1">
+                            <div class="card-content white-text">
+                                <span class="card-title"></span>
+                                <label for="artist-input">Choose Your Artist</label>
+                                
+                                <input type="text" id="artist-input"><br>
+                                
+                                <input id="select-artist" type="submit" value="GO!">
+                            </form>
                             
-                            <input id="select-artist" type="submit" value="GO!">
-                          </form>
-                          
-                          <div id="artist-div"></div>
+                            <div id="artist-div"></div>
                         </div>
-
+                        
                     </div>
                 </div>
                 <div class="col s12 m4 l6">
@@ -122,10 +124,10 @@
                         </div>
                     </div>
                 </div>
-
+                
             </div>
         </div>
-
+        
         </div>
     </main>
     <footer class="page-footer blue darken-4 z-depth-2">
@@ -135,32 +137,33 @@
                     <h5 class="white-text">First Footer Content</h5>
                     <p class="grey-text text-lighten-4">You can use rows and columns here to organize your footer
                         content.</p>
+                    </div>
+                    <div class="col s12 m4 l6">
+                        <h5 class="white-text">Second Footer Content</h5>
+                        <p class="grey-text text-lighten-4">You can use rows and columns here to organize your footer
+                            content.</p>
+                        </div>
+                    </div>
                 </div>
-                <div class="col s12 m4 l6">
-                    <h5 class="white-text">Second Footer Content</h5>
-                    <p class="grey-text text-lighten-4">You can use rows and columns here to organize your footer
-                        content.</p>
+                <div class="footer-copyright">
+                    <div class="container">
+                        © 2018 Copyright Text
+                        <a class="grey-text text-lighten-4 right" href="#!">More Links</a>
+                    </div>
                 </div>
-            </div>
-        </div>
-        <div class="footer-copyright">
-            <div class="container">
-                © 2018 Copyright Text
-                <a class="grey-text text-lighten-4 right" href="#!">More Links</a>
-            </div>
-        </div>
-    </footer>
-    <!-- jQuery CDN -->
-    <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+            </footer>
+            <!-- jQuery CDN -->
+            <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
         crossorigin="anonymous"></script>
-    <!-- Materialize JS CDN -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script>
-    
-    <!-- Moment.js CDN -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/moment.js"></script>
-
-    <script>
-       
-    </script>
+        <!-- Materialize JS CDN -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script>
+        
+        <!-- Moment.js CDN -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/moment.js"></script>
+        
+        <!-- Firebase CDN -->
+        <script src="https://www.gstatic.com/firebasejs/5.4.2/firebase.js"></script>
+        
+        
     <script src="assets/javaScript/logic.js"></script>
 </body>

@@ -1,6 +1,23 @@
-
+// Global variables
 var apiKey = "22c5ef699bce141cff90a305163f2989";
 var eventData = [];
+var currentBandName = "";
+var eventDate = "";
+var eventTime = "";
+var eventLocation ="";
+
+var config = {
+  apiKey: "AIzaSyC9h2PUE_MqHDbAei_AROxKAEFDsayeOMI",
+  authDomain: "this-is-a-thomas-project.firebaseapp.com",
+  databaseURL: "https://this-is-a-thomas-project.firebaseio.com",
+  projectId: "this-is-a-thomas-project",
+  storageBucket: "this-is-a-thomas-project.appspot.com",
+  messagingSenderId: "811715918066"
+};
+
+firebase.initializeApp(config);
+var database = firebase.database();
+var eventRef = database.ref("/events/");
 
 function searchBandsInTown(artist) {
 
@@ -12,6 +29,7 @@ function searchBandsInTown(artist) {
     // console.log(queryURL);
     console.log(response);
 
+    // Adding artist for later use
     var artistName = $("<h1>").text(response.name);
     var artistURL = $("<a>").attr("href", response.url).append(artistName);
     var artistImage = $("<img>").attr("src", response.thumb_url);
@@ -37,10 +55,12 @@ function searchBandsInTown(artist) {
 ///////////////////////////////////////////////////////////////////////////////
 
 function displayVenues() {
+
+  $("#venueData").empty();
   for( let i = 0; i < eventData.length; ++i) {
     console.log(eventData[i].event_Location)
-    $("#venueData").append("<li class='collection-item'>" + 
-      eventData[i].event_Date + "\t" +
+    $("#venueData").append("<li class='collection-item venue-item' id='" +
+      i + "'>" + eventData[i].event_Date + "\t" +
       eventData[i].event_Location + "\t" +
       eventData[i].event_Time + "\t" +
       "</li>");
@@ -82,6 +102,7 @@ function getVenueData(artist) {
     method: "GET"
   }). then( (response) => {
     // debugger;
+    eventData.length = 0;
     for( let i = 0; i < response.length; ++i) {
       var myDate = response[i].datetime;
       // debugger;
@@ -96,13 +117,28 @@ function getVenueData(artist) {
     displayVenues();  
   });
 
-  $("document").ready(function () {
+  $(document).ready(function () {
     $(".button-collapse").sideNav();
-
-    $("#venueTest").on("click", () => {
     
-    })
-});
+    $("#venueData").on("click", ".venue-item", (event) => {
+      var idNum = parseInt(event.target.attributes.id.nodeValue);
+      currentBandName = $("h1").text();
+      // console.log(eventData[idNum]);
+      // console.log(eventData[idNum].event_Location);
+      // debugger;
+      eventRef.push({
+        bandName: currentBandName,
+        eventDate: eventData[idNum].event_Date,
+        eventTime: eventData[idNum].event_Time,
+        eventLocation: eventData[idNum].event_Location
+      });
 
+    });
+  });
+
+  eventRef.on("child_added", (snapshot) => {
+
+  });
+  
       
 }
