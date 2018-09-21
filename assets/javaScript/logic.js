@@ -1,5 +1,6 @@
 
 var apiKey = "22c5ef699bce141cff90a305163f2989";
+var eventData = [];
 
 function searchBandsInTown(artist) {
 
@@ -25,6 +26,27 @@ function searchBandsInTown(artist) {
 
 
 
+///////////////////////////////////////////////////////////////////////////////
+// Function: displayVenues
+// Creates a list of venues
+//
+// Inputs: None.
+//
+// Output:  None
+//
+///////////////////////////////////////////////////////////////////////////////
+
+function displayVenues() {
+  for( let i = 0; i < eventData.length; ++i) {
+    console.log(eventData[i].event_Location)
+    $("#venueData").append("<li class='collection-item'>" + 
+      eventData[i].event_Date + "\t" +
+      eventData[i].event_Location + "\t" +
+      eventData[i].event_Time + "\t" +
+      "</li>");
+  }
+}
+
 $("#select-artist").on("click", function (event) {
 
   event.preventDefault();
@@ -34,6 +56,7 @@ $("#select-artist").on("click", function (event) {
 
   searchBandsInTown(inputArtist);
   getVenueData(inputArtist);
+  
 });
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -58,12 +81,10 @@ function getVenueData(artist) {
     url: queryURL,
     method: "GET"
   }). then( (response) => {
-
-    var eventData = [];
-    
+    // debugger;
     for( let i = 0; i < response.length; ++i) {
       var myDate = response[i].datetime;
-
+      // debugger;
       eventData.push({
         event_Id: i,
         event_Date: moment(myDate).format("ddd, DD MMM YYYY"),
@@ -71,8 +92,17 @@ function getVenueData(artist) {
         event_Location: response[i].venue.city + ", " + response[i].venue.region
       });
     }
-      return eventData;
       
+    displayVenues();  
   });
+
+  $("document").ready(function () {
+    $(".button-collapse").sideNav();
+
+    $("#venueTest").on("click", () => {
+    
+    })
+});
+
       
 }
