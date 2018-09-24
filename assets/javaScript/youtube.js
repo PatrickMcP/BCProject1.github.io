@@ -21,8 +21,8 @@ function getVideos() {
         
         var playlistInfo = "https://www.youtube.com/embed?listType=playlist&list=" + videoData.items[0].id.playlistId
         $("#playlistframe").attr("src", playlistInfo);
-        $("#playlistframe").attr("width", "560");
-        $("#playlistframe").attr("height", "300");
+        $("#playlistframe").attr("width", 400);
+        $("#playlistframe").attr("height", 200);
     });
  };
 
