@@ -55,7 +55,7 @@ function searchBandsInTown(artist) {
 ///////////////////////////////////////////////////////////////////////////////
 
 function displayVenues() {
-
+  va
   $("#venueData").empty();
   for( let i = 0; i < eventData.length; ++i) {
     console.log(eventData[i].event_Location)
