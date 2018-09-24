@@ -30,13 +30,13 @@ function searchBandsInTown(artist) {
     console.log(response);
 
     // Adding artist for later use
-    var artistName = $("<h1>").text(response.name);
+    var artistName = $("<h5>").text(response.name);
     var artistURL = $("<a>").attr("href", response.url).append(artistName);
     var artistImage = $("<img>").attr("src", response.thumb_url);
-    var trackerCount = $("<h2>").text(response.tracker_count + " fans tracking this artist");
-    var upcomingEvents = $("<h2>").text(response.upcoming_event_count + " upcoming events");
+    var trackerCount = $("<p>").text(response.tracker_count + " fans tracking this artist");
+    var upcomingEvents = $("<p>").text(response.upcoming_event_count + " upcoming events");
     var goToArtist = $("<a>").attr("href", response.url).text("See Tour Dates");
-
+    
     $("#artist-div").empty();
     $("#artist-div").append(artistURL, artistImage, trackerCount, upcomingEvents, goToArtist);
   });
@@ -55,7 +55,7 @@ function searchBandsInTown(artist) {
 ///////////////////////////////////////////////////////////////////////////////
 
 function displayVenues() {
-
+  
   $("#venueData").empty();
   for( let i = 0; i < eventData.length; ++i) {
     console.log(eventData[i].event_Location)
