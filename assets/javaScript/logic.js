@@ -4,7 +4,7 @@ var eventData = [];
 var currentBandName = "";
 var eventDate = "";
 var eventTime = "";
-var eventLocation ="";
+var eventLocation = "";
 
 var config = {
   apiKey: "AIzaSyC9h2PUE_MqHDbAei_AROxKAEFDsayeOMI",
@@ -36,7 +36,7 @@ function searchBandsInTown(artist) {
     var trackerCount = $("<p>").text(response.tracker_count + " fans tracking this artist");
     var upcomingEvents = $("<p>").text(response.upcoming_event_count + " upcoming events");
     var goToArtist = $("<a>").attr("href", response.url).text("See Tour Dates");
-    
+
     $("#artist-div").empty();
     $("#artist-div").append(artistURL, artistImage, trackerCount, upcomingEvents, goToArtist);
   });
@@ -55,9 +55,9 @@ function searchBandsInTown(artist) {
 ///////////////////////////////////////////////////////////////////////////////
 
 function displayVenues() {
-  
+
   $("#venueData").empty();
-  for( let i = 0; i < eventData.length; ++i) {
+  for (let i = 0; i < eventData.length; ++i) {
     console.log(eventData[i].event_Location)
     $("#venueData").append("<li class='collection-item venue-item' id='" +
       i + "'>" + eventData[i].event_Date + "\t" +
@@ -67,17 +67,33 @@ function displayVenues() {
   }
 }
 
-$("#select-artist").on("click", function (event) {
+///////////////////////////////////////////////////////////////////////////////
+// Function: updateSavedEvents
+// Updated the saved events
+//
+// Inputs: None.
+//
+// Output:  None
+//
+///////////////////////////////////////////////////////////////////////////////
+function updateSavedEvents(snapshot) {
+  // Grab data
+  currentBandName = snapshot.val().bandName;
+  eventDate = snapshot.val().eventDate;
+  eventTime = snapshot.val().eventTime;
+  eventLocation = snapshot.val().eventLocation;
 
-  event.preventDefault();
+  console.log("Got Here");
 
-  var inputArtist = $("#artist-input").val().trim();
+  $("#savedEvents").append("<li class='collection-item'>" +
+    currentBanName + "\t" +
+    eventDate + "\t" +
+    eventTime + "\t" +
+    eventLocation + "\t" +
+    "</li>");
+}
 
 
-  searchBandsInTown(inputArtist);
-  getVenueData(inputArtist);
-  
-});
 
 ///////////////////////////////////////////////////////////////////////////////
 // Function: getVenueData
@@ -92,53 +108,64 @@ $("#select-artist").on("click", function (event) {
 // Event_Time
 // Event_Location
 ///////////////////////////////////////////////////////////////////////////////
-
 function getVenueData(artist) {
   var queryURL = "https://rest.bandsintown.com/artists/" + artist + "/events?app_id=" + apiKey;
 
   console.log(queryURL);
   $.ajax({
-    url: queryURL,
-    method: "GET"
-  }). then( (response) => {
-    // debugger;
-    eventData.length = 0;
-    for( let i = 0; i < response.length; ++i) {
-      var myDate = response[i].datetime;
+      url: queryURL,
+      method: "GET"
+  }).then((response) => {
       // debugger;
-      eventData.push({
-        event_Id: i,
-        event_Date: moment(myDate).format("ddd, DD MMM YYYY"),
-        event_Time: moment(myDate).format("hh:mm A"),
-        event_Location: response[i].venue.city + ", " + response[i].venue.region
-      });
-    }
-      
-    displayVenues();  
+      eventData.length = 0;
+      for (let i = 0; i < response.length; ++i) {
+          var myDate = response[i].datetime;
+          // debugger;
+          eventData.push({
+              event_Id: i,
+              event_Date: moment(myDate).format("ddd, DD MMM YYYY"),
+              event_Time: moment(myDate).format("hh:mm A"),
+              event_Location: response[i].venue.city + ", " + response[i].venue.region
+          });
+      }
+
+      displayVenues();
+  });
+};
+
+
+
+$(document).ready(function () {
+  eventRef.on("child_added", () => {
+    console.log("Got here - Chlid_Added");
   });
 
-  $(document).ready(function () {
-    $(".button-collapse").sideNav();
-    
-    $("#venueData").on("click", ".venue-item", (event) => {
-      var idNum = parseInt(event.target.attributes.id.nodeValue);
-      currentBandName = $("h1").text();
-      // console.log(eventData[idNum]);
-      // console.log(eventData[idNum].event_Location);
-      // debugger;
-      eventRef.push({
-        bandName: currentBandName,
-        eventDate: eventData[idNum].event_Date,
-        eventTime: eventData[idNum].event_Time,
-        eventLocation: eventData[idNum].event_Location
-      });
+  $("#select-artist").on("click", function (event) {
+    event.preventDefault();
 
+    var inputArtist = $("#artist-input").val().trim();
+    currentBandName = inputArtist;
+
+    searchBandsInTown(inputArtist);
+    getVenueData(inputArtist);
+
+  });
+
+  $(".button-collapse").sideNav();
+
+  $("#venueData").on("click", ".venue-item", (event) => {
+    var idNum = parseInt(event.target.attributes.id.nodeValue);
+
+    eventRef.push({
+      bandName: currentBandName,
+      eventDate: eventData[idNum].event_Date,
+      eventTime: eventData[idNum].event_Time,
+      eventLocation: eventData[idNum].event_Location
     });
-  });
-
-  eventRef.on("child_added", (snapshot) => {
 
   });
-  
-      
-}
+
+});
+
+
+
