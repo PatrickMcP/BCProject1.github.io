@@ -26,9 +26,6 @@ function searchBandsInTown(artist) {
     url: queryURL,
     method: "GET"
   }).then(function (response) {
-    // console.log(queryURL);
-    console.log(response);
-
     // Adding artist for later use
     var artistName = $("<h5>").text(response.name);
     var artistURL = $("<a>").attr("href", response.url).append(artistName);
@@ -58,7 +55,6 @@ function displayVenues() {
 
   $("#venueData").empty();
   for (let i = 0; i < eventData.length; ++i) {
-    console.log(eventData[i].event_Location)
     $("#venueData").append("<li class='collection-item venue-item' id='" +
       i + "'>" + eventData[i].event_Date + "\t" +
       eventData[i].event_Location + "\t" +
@@ -83,14 +79,13 @@ function updateSavedEvents(snapshot) {
   eventTime = snapshot.val().eventTime;
   eventLocation = snapshot.val().eventLocation;
 
-  console.log("Got Here");
+  var newRow = $("<tr>");
+  newRow.append("<td>" + currentBandName + "</td>");
+  newRow.append("<td>" + eventDate + "</td>");
+  newRow.append("<td>" + eventTime + "</td>");
+  newRow.append("<td>" + eventLocation + "</td>");
 
-  $("#savedEvents").append("<li class='collection-item'>" +
-    currentBanName + "\t" +
-    eventDate + "\t" +
-    eventTime + "\t" +
-    eventLocation + "\t" +
-    "</li>");
+  $("#savedEvents").append(newRow);
 }
 
 
@@ -116,11 +111,9 @@ function getVenueData(artist) {
       url: queryURL,
       method: "GET"
   }).then((response) => {
-      // debugger;
       eventData.length = 0;
       for (let i = 0; i < response.length; ++i) {
           var myDate = response[i].datetime;
-          // debugger;
           eventData.push({
               event_Id: i,
               event_Date: moment(myDate).format("ddd, DD MMM YYYY"),
@@ -128,17 +121,13 @@ function getVenueData(artist) {
               event_Location: response[i].venue.city + ", " + response[i].venue.region
           });
       }
-
       displayVenues();
   });
 };
 
 
-
 $(document).ready(function () {
-  eventRef.on("child_added", () => {
-    console.log("Got here - Chlid_Added");
-  });
+  eventRef.on("child_added", updateSavedEvents);
 
   $("#select-artist").on("click", function (event) {
     event.preventDefault();
@@ -162,9 +151,7 @@ $(document).ready(function () {
       eventTime: eventData[idNum].event_Time,
       eventLocation: eventData[idNum].event_Location
     });
-
   });
-
 });
 
 
