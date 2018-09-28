@@ -32,10 +32,10 @@ function searchBandsInTown(artist) {
     var artistImage = $("<img>").attr("src", response.thumb_url);
     var trackerCount = $("<p>").text(response.tracker_count + " fans tracking this artist");
     var upcomingEvents = $("<p>").text(response.upcoming_event_count + " upcoming events");
-    var goToArtist = $("<a>").attr("href", response.url).text("See Tour Dates");
+  
 
     $("#artist-div").empty();
-    $("#artist-div").append(artistURL, artistImage, trackerCount, upcomingEvents, goToArtist);
+    $("#artist-div").append(artistURL, artistImage, trackerCount, upcomingEvents);
   });
 }
 

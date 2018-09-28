@@ -10,7 +10,8 @@
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <!-- Materialize CSS CDN -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css">
-
+    <link rel="stylesheet" href="assets/css/style.css">
+    
 
     <!-- Your custom styles -->
     <!-- Used as an example only to position the footer at the end of the page.
@@ -30,10 +31,11 @@
 
 <body>
     <header>
-        <nav class="red lighten-2">
+        <nav class=" blue-grey darken-2">
             <div class="nav-wrapper">
                 <div class="container">
                     <a href="#" class="brand-logo">Group 6</a>
+                    <!--For later use
                     <a href="#" data-activates="mobile-menu" class="button-collapse"><i class="material-icons">menu</i></a>
                     <ul class="right hide-on-med-and-down">
                         <li><a href="#">item1</a></li>
@@ -57,6 +59,7 @@
                         <li><a href="#">item3</a></li>
                         <li><a href="#">item4</a></li>
                     </ul>
+                -->
                 </div>
             </div>
         </nav>
@@ -64,109 +67,114 @@
     <div class="slider">
         <ul class="slides">
             <li>
-                <img src="https://lorempixel.com/580/250/nature/1"> <!-- random image -->
-                <div class="caption center-align">
-                    <h3>This is our big Tagline!</h3>
-                    <h5 class="light grey-text text-lighten-3">Here's our small slogan.</h5>
-                </div>
+                <img src="assets/images/kol.jpg"> <!-- random image -->
             </li>
             <li>
                 <img src="assets/images/jimihendrix.jpg"> <!-- random image -->
-                <div class="caption left-align">
-                    <h3>Left Aligned Caption</h3>
-                    <h5 class="light grey-text text-lighten-3">Here's our small slogan.</h5>
-                </div>
             </li>
             <li>
                 <img src="assets/images/Metallica-toca-Fuel-em-Boston.jpg"> <!-- random image -->
-                <div class="caption right-align">
-                    <h3>Right Aligned Caption</h3>
-                    <h5 class="light grey-text text-lighten-3">Here's our small slogan.</h5>
-                </div>
             </li>
             <li>
                 <img src="assets/images/String-Cheese-SCI-Red-Rocks-Williams-Crop-2.jpg"> <!-- random image -->
-                <div class="caption center-align">
-                    <h3>This is our big Tagline!</h3>
-                    <h5 class="light grey-text text-lighten-3">Here's our small slogan.</h5>
-                </div>
+
             </li>
         </ul>
-    
-        <section id="search" class="section white">
-            <div class="container">
-                <div class="row center">
-                    <div class="col s4 offset-s4">
-                        <input placeholder="Enter a Band Here" class="center-align red lighten-2" type="text" id="artist-input"><br>
-                        <input class="btn-medium waves-effect waves-light red lighten-2" id="select-artist" type="submit"
-                            value="GO!">
-                    </div>
-                    <br><br>
-                </div>
-            </div>
-        </section>
-     
+
+
     </div>
 
 
     <main>
-    
+
         <div class="container">
-
-            <div class="row center">
-                <div class="col sm12 l6 offset-l3">
-                    <div class="text-center" id="artist-div"></div>
-                </div>
-            </div>
-
             <div class="row">
-                <div class="col s12 m4 l6">
-                    <div class="video-container">
-                        <div class="video-container">
-                            <iframe id="playlistframe" width="" height="" src="" frameborder="0" allow="autoplay; encrypted-media"
-                                allowfullscreen></iframe>
+                <div class="col s12">
+                    <!-- <div>
+                            <ul class="collection" id="savedEvents">
+                                
+                            </ul>
+                        </div> -->
+                    <div class="card blue-grey ">
+                        <div class="card-content white-text">
+                            <span class="card-title">Favorites</span>
+                            <table class="blue-grey lighten-4 black-text">
+                                <thead>
+                                    <tr>
+                                        <th>Name</th>
+                                        <th>Date</th>
+                                        <th>Time</th>
+                                        <th>Venue</th>
+                                    </tr>
+                                </thead>
+
+                                <tbody id="savedEvents">
+
+                                </tbody>
+                            </table>
                         </div>
                     </div>
-                </div>
 
-                <div class="col s12 m4 l6">
-                    <div>
-                        <ul class="collection" id="venueData">
+                    <section id="search" class="section">
+                        <div class="container">
+                            <div class="row center">
+                                <div class="col s4 offset-s4">
+                                    <input placeholder="Search for bands here" class="center-align re blue-grey darken-1"
+                                        type="text" id="artist-input"><br>
+                                    <input class="btn-medium waves-effect waves-light  white z-depth-1" id="select-artist"
+                                        type="submit" value="GO!">
+                                </div>
+                                <br><br>
+                            </div>
+                        </div>
+                    </section>
 
-                        </ul>
+                    <div class="row center" id="hidediv">
+                            <div class="col s12 m4 l6 offset-l3">
+                            <div class="card blue-grey">
+                                <div class="card-content white-text">
+                                    <span class="card-title">Artist Info</span>
+                                    <div class="text-center" id="artist-div"></div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                </div>
-                <div class="col s12 m4 l6">
-                    <!-- <div>
-                        <ul class="collection" id="savedEvents">
-                            
-                        </ul>
-                    </div> -->
-                    <table>
-                        <thead>
-                          <tr>
-                              <th>Name</th>
-                              <th>Date</th>
-                              <th>Time</th>
-                              <th>Venue</th>
-                          </tr>
-                        </thead>
-                
-                        <tbody id="savedEvents">
-                          
-                        </tbody>
-                      </table>
-                </div>
-            </div>
 
-        </div>
+                    <div class="row" id="hiderow">
+                        <div class="col s12 m4 l6">
+                            <div class="card  blue-grey z-depth-1" id="hidediv">
+                                <div class="card-content white-text">
+                                    <span class="card-title">Listen</span>
+                                    <div>
+                                        <div class="video-container " id="hidediv">
+                                            <iframe id="playlistframe" width="0" height="0" src="" frameborder="0"
+                                                allow="autoplay; encrypted-media" allowfullscreen></iframe>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
 
+                        <div class="col s12 m4 l6">
+                            <div class="card  blue-grey z-depth-1" id="hidediv">
+                                <div class="card-content white-text">
+                                    <span class="card-title">Tour Dates</span>
+                                    <div id="hidediv">
+                                        <ul class="collection black-text blue-grey lighten-4" id="venueData">
+
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+                    </div>
     </main>
-    <footer class="page-footer red lighten-2">
+    <footer class="page-footer  blue-grey darken-1">
         <div class="footer-copyright">
             <div class="container">
                 © 2018 Copyright Text
-                <a class="grey-text text-lighten-4 right" href="#!">More Links</a>
             </div>
         </div>
     </footer>
@@ -187,3 +195,5 @@
     <script src="assets/javaScript/youtube.js"></script>
     <script src="assets/javaScript/material.js"></script>
 </body>
+
+</html>

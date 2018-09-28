@@ -29,9 +29,18 @@ function getVideos() {
  $("#select-artist").on("click", function (event) {
 
     event.preventDefault();
-  
+    $("#hidediv").show();
+    $("#venueData").show();
+    $("#hiderow").show();
     var inputArtist = $("#artist-input").val().trim();
 
     getVideos(inputArtist);
     
   });
+
+  $(document).ready(function(){
+    $("#venueData").hide();
+    $("#hidediv").hide();
+    $("#hiderow").hide();
+
+});
